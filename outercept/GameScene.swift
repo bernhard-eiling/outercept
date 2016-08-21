@@ -11,35 +11,29 @@ import GameplayKit
 
 class GameScene: SKScene {
     
-    let strokeCollection = StrokeCollection()
-    var currentStrokeNode: StrokeNode?
+    let interceptionCollection = InterceptionCollection()
+    var currentInterceptionSubtree: InterceptionSubtree?
    
     override func didMove(to view: SKView) {
 
     }
     
     func touchDown(atPoint point : CGPoint) {
-        currentStrokeNode = StrokeNode(withPoint: point)
-        strokeCollection.addNode(strokeNode: currentStrokeNode!)
-        addChild(currentStrokeNode!)
+        currentInterceptionSubtree = InterceptionSubtree(withStartPoint: point)
+        addChild(currentInterceptionSubtree!)
+        interceptionCollection.addNode(interceptionSubtree: currentInterceptionSubtree!)
     }
     
     func touchMoved(toPoint point : CGPoint) {
-        currentStrokeNode?.addPoint(point: point)
+        currentInterceptionSubtree?.add(point: point)
     }
     
     func touchUp(atPoint point : CGPoint) {
-        guard let currentStrokeNode = currentStrokeNode,
-        let path = currentStrokeNode.path else { return }
-        let spriteNode = SKSpriteNode(imageNamed: "Spaceship")
-        addChild(spriteNode)
-        spriteNode.scale(to: CGSize(width: 30, height: 30))
-        let followAction = SKAction.follow(path, speed: 150)
-        spriteNode.run(followAction)
+        currentInterceptionSubtree?.startInterceptor()
     }
     
     override func update(_ currentTime: TimeInterval) {
-        // Called before each frame is rendered
+        interceptionCollection.update()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
