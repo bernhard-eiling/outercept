@@ -19,6 +19,8 @@
 		9E9550301D5CFCE90069EAFD /* outerceptUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9E95502F1D5CFCE90069EAFD /* outerceptUITests.swift */; };
 		9EA630A71D681B7100D0A72E /* StrokeCollection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA630A61D681B7100D0A72E /* StrokeCollection.swift */; };
 		9EA630A91D681C1500D0A72E /* StrokeNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EA630A81D681C1500D0A72E /* StrokeNode.swift */; };
+		9EF3AD4D1D69B7FF00E6C1FA /* Enemy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF3AD4C1D69B7FF00E6C1FA /* Enemy.swift */; };
+		9EF3AD501D69CF9800E6C1FA /* CGVectorEtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF3AD4F1D69CF9800E6C1FA /* CGVectorEtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +59,8 @@
 		9E9550311D5CFCE90069EAFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9EA630A61D681B7100D0A72E /* StrokeCollection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StrokeCollection.swift; sourceTree = "<group>"; };
 		9EA630A81D681C1500D0A72E /* StrokeNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StrokeNode.swift; sourceTree = "<group>"; };
+		9EF3AD4C1D69B7FF00E6C1FA /* Enemy.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enemy.swift; sourceTree = "<group>"; };
+		9EF3AD4F1D69CF9800E6C1FA /* CGVectorEtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGVectorEtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +111,8 @@
 		9E9550081D5CFCE80069EAFD /* outercept */ = {
 			isa = PBXGroup;
 			children = (
+				9EF3AD4E1D69CF7700E6C1FA /* Extenstions */,
+				9EF3AD4B1D69B7E100E6C1FA /* Entities */,
 				9EA6309E1D663C5200D0A72E /* Stroke */,
 				9E9550091D5CFCE90069EAFD /* AppDelegate.swift */,
 				9E95500B1D5CFCE90069EAFD /* GameScene.sks */,
@@ -146,6 +152,22 @@
 				9EA630A81D681C1500D0A72E /* StrokeNode.swift */,
 			);
 			name = Stroke;
+			sourceTree = "<group>";
+		};
+		9EF3AD4B1D69B7E100E6C1FA /* Entities */ = {
+			isa = PBXGroup;
+			children = (
+				9EF3AD4C1D69B7FF00E6C1FA /* Enemy.swift */,
+			);
+			name = Entities;
+			sourceTree = "<group>";
+		};
+		9EF3AD4E1D69CF7700E6C1FA /* Extenstions */ = {
+			isa = PBXGroup;
+			children = (
+				9EF3AD4F1D69CF9800E6C1FA /* CGVectorEtensions.swift */,
+			);
+			name = Extenstions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -287,8 +309,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9EF3AD501D69CF9800E6C1FA /* CGVectorEtensions.swift in Sources */,
 				9E9550101D5CFCE90069EAFD /* GameScene.swift in Sources */,
 				9EA630A71D681B7100D0A72E /* StrokeCollection.swift in Sources */,
+				9EF3AD4D1D69B7FF00E6C1FA /* Enemy.swift in Sources */,
 				9E9550121D5CFCE90069EAFD /* GameViewController.swift in Sources */,
 				9E95500A1D5CFCE90069EAFD /* AppDelegate.swift in Sources */,
 				9EA630A91D681C1500D0A72E /* StrokeNode.swift in Sources */,

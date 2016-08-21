@@ -11,8 +11,10 @@ import Foundation
 class StrokeCollection {
     
     var strokes: [StrokeNode] = []
+    let maxNumber: Int = 3
     
     func addNode(strokeNode: StrokeNode) {
+        guard strokes.count < maxNumber else { return }
         strokes.append(strokeNode)
     }
 }

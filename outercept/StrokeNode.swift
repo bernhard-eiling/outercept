@@ -11,6 +11,8 @@ import SpriteKit
 class StrokeNode: SKShapeNode {
     
     let startPoint: CGPoint
+    let maxLenght: CGFloat = 350
+    var currentLenght: CGFloat = 0
     
     init(withPoint point: CGPoint) {
         startPoint = point
@@ -25,9 +27,12 @@ class StrokeNode: SKShapeNode {
     }
     
     func addPoint(point: CGPoint) {
-        if let path = self.path as! CGMutablePath? {
-            path.addLineTo(nil, x: point.x, y: point.y)
-            self.path = path
-        }
+        guard let mutablePath = path as! CGMutablePath? else { return }
+        let nextVector = CGVector.vector(fromPoint: mutablePath.currentPoint, andPoint: point)
+        let nextVectorLength = nextVector.length()
+        guard currentLenght + nextVectorLength < maxLenght else { return }
+        currentLenght += nextVectorLength
+        mutablePath.addLineTo(nil, x: point.x, y: point.y)
+        path = mutablePath
     }
 }

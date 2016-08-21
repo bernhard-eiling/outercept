@@ -20,6 +20,7 @@ class GameScene: SKScene {
     
     func touchDown(atPoint point : CGPoint) {
         currentStrokeNode = StrokeNode(withPoint: point)
+        strokeCollection.addNode(strokeNode: currentStrokeNode!)
         addChild(currentStrokeNode!)
     }
     
@@ -33,7 +34,7 @@ class GameScene: SKScene {
         let spriteNode = SKSpriteNode(imageNamed: "Spaceship")
         addChild(spriteNode)
         spriteNode.scale(to: CGSize(width: 30, height: 30))
-        let followAction = SKAction.follow(path, speed: 200)
+        let followAction = SKAction.follow(path, speed: 150)
         spriteNode.run(followAction)
     }
     
