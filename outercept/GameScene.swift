@@ -11,17 +11,16 @@ import GameplayKit
 
 class GameScene: SKScene {
     
-    let interceptionCollection = InterceptionCollection()
+    var interceptionCollection: InterceptionCollection?
     var currentInterceptionSubtree: InterceptionSubtree?
-   
+    
     override func didMove(to view: SKView) {
-
+        interceptionCollection = InterceptionCollection(withScene: self)
     }
     
     func touchDown(atPoint point : CGPoint) {
         currentInterceptionSubtree = InterceptionSubtree(withStartPoint: point)
-        addChild(currentInterceptionSubtree!)
-        interceptionCollection.addNode(interceptionSubtree: currentInterceptionSubtree!)
+        interceptionCollection?.addNode(interceptionSubtree: currentInterceptionSubtree!)
     }
     
     func touchMoved(toPoint point : CGPoint) {
@@ -33,7 +32,7 @@ class GameScene: SKScene {
     }
     
     override func update(_ currentTime: TimeInterval) {
-        interceptionCollection.update()
+        interceptionCollection?.update()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

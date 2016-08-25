@@ -6,28 +6,30 @@
 //  Copyright © 2016 bernhardeiling.com. All rights reserved.
 //
 
-import Foundation
+import SpriteKit
 
 class InterceptionCollection {
     
     var interceptions: [InterceptionSubtree] = []
     let maxNumber: Int = 3
+    let scene: SKScene
+    
+    init(withScene scene: SKScene) {
+        self.scene = scene
+    }
     
     func addNode(interceptionSubtree: InterceptionSubtree) {
         guard interceptions.count < maxNumber else { return }
         interceptions.append(interceptionSubtree)
+        scene.addChild(interceptionSubtree)
     }
     
     func update() {
-        
-        // TODO: fix filtering and remove old interception subtrees
-        
-        interceptions.filter { (interception) -> Bool in
+        interceptions = interceptions.filter { (interception) -> Bool in
             if interception.isInterceptionFinished {
                 interception.removeFromParent()
-                
             }
-            return interception.isInterceptionFinished
+            return !interception.isInterceptionFinished
         }
     }
 }
