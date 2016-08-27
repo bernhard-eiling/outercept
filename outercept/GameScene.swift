@@ -11,28 +11,33 @@ import GameplayKit
 
 class GameScene: SKScene {
     
-    var interceptionCollection: InterceptionCollection?
-    var currentInterceptionSubtree: InterceptionSubtree?
+    let interceptionsLayer = InterceptionsLayer()
+    let physicsContactManager = PhysiksContactManager()
+    var enemyLayer = EnemyLayer()
+    var currentInterception: Interception?
     
     override func didMove(to view: SKView) {
-        interceptionCollection = InterceptionCollection(withScene: self)
+        physicsWorld.gravity = CGVector(dx: 0, dy: 0)
+        physicsWorld.contactDelegate = physicsContactManager
+        addChild(interceptionsLayer)
+        addChild(enemyLayer)
     }
     
     func touchDown(atPoint point : CGPoint) {
-        currentInterceptionSubtree = InterceptionSubtree(withStartPoint: point)
-        interceptionCollection?.addNode(interceptionSubtree: currentInterceptionSubtree!)
+        currentInterception = Interception(withStartPoint: point)
+        interceptionsLayer.addNode(interception: currentInterception!)
     }
     
     func touchMoved(toPoint point : CGPoint) {
-        currentInterceptionSubtree?.add(point: point)
+        currentInterception?.add(point: point)
     }
     
     func touchUp(atPoint point : CGPoint) {
-        currentInterceptionSubtree?.startInterceptor()
+        currentInterception?.startInterceptor()
     }
     
     override func update(_ currentTime: TimeInterval) {
-        interceptionCollection?.update()
+        interceptionsLayer.update()
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

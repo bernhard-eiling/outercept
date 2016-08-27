@@ -8,20 +8,15 @@
 
 import SpriteKit
 
-class InterceptionCollection {
-    
-    var interceptions: [InterceptionSubtree] = []
+class InterceptionsLayer: SKNode {
+
+    var interceptions: [Interception] = []
     let maxNumber: Int = 3
-    let scene: SKScene
-    
-    init(withScene scene: SKScene) {
-        self.scene = scene
-    }
-    
-    func addNode(interceptionSubtree: InterceptionSubtree) {
+
+    func addNode(interception: Interception) {
         guard interceptions.count < maxNumber else { return }
-        interceptions.append(interceptionSubtree)
-        scene.addChild(interceptionSubtree)
+        interceptions.append(interception)
+        addChild(interception)
     }
     
     func update() {
@@ -32,4 +27,5 @@ class InterceptionCollection {
             return !interception.isInterceptionFinished
         }
     }
+    
 }

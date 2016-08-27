@@ -1,5 +1,5 @@
 //
-//  CGVectorEtensions.swift
+//  CGVectorExtensions.swift
 //  outercept
 //
 //  Created by Bernhard Eiling on 21.08.16.

@@ -17,6 +17,10 @@ class InterceptorNode: SKSpriteNode {
         let size = CGSize(width: 30, height: 30)
         endPosition = position
         super.init(texture: texture, color: UIColor.blue, size: size)
+        physicsBody = SKPhysicsBody(circleOfRadius: 15)
+        physicsBody?.categoryBitMask = PhysicsBitmask.interceptor
+        physicsBody?.contactTestBitMask = PhysicsBitmask.enemy
+        physicsBody?.collisionBitMask = PhysicsBitmask.none
     }
 
     required init?(coder aDecoder: NSCoder) {

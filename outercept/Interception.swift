@@ -8,10 +8,10 @@
 
 import SpriteKit
 
-class InterceptionSubtree: SKNode {
+class Interception: SKNode {
     
     private let strokeNode: StrokeNode
-    private var interceptorNode: InterceptorNode?
+    var interceptorNode: InterceptorNode?
     
     var isInterceptionFinished: Bool {
         guard let interceptor = interceptorNode else { return false }
