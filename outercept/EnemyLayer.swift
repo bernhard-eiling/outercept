@@ -15,23 +15,13 @@ class EnemyLayer: SKNode {
     override init() {
         enemies = [EnemyNode(), EnemyNode(), EnemyNode()]
         super.init()
-        for enemy in enemies {
-            
-            enemy.position = CGPoint(x: 100, y: 100)
-//            randomStartPosition()
-            
-            addChild(enemy)
-        }
     }
     
-    private func randomStartPosition() -> CGPoint? {
-        if arc4random() % 2 == 0 {
-            // TODO: variable height
-//            scene.size.width
-        } else {
-            // TODO: variable width
+    func setup() {
+        for enemy in enemies {
+            addChild(enemy)
+            enemy.reset()
         }
-        return nil
     }
     
     required init?(coder aDecoder: NSCoder) {

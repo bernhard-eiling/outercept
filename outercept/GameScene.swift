@@ -19,8 +19,13 @@ class GameScene: SKScene {
     override func didMove(to view: SKView) {
         physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         physicsWorld.contactDelegate = physicsContactManager
+        anchorPoint = CGPoint(x: 0, y: 0)
         addChild(interceptionsLayer)
         addChild(enemyLayer)
+        let mothership = MothershipNode()
+        addChild(mothership)
+        mothership.setup()
+        enemyLayer.setup()
     }
     
     func touchDown(atPoint point : CGPoint) {

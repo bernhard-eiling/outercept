@@ -24,6 +24,8 @@
 		9EEB76221D6F89D10051CEFF /* EnemyNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEB76211D6F89D10051CEFF /* EnemyNode.swift */; };
 		9EEB76251D6F8B910051CEFF /* EnemyLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEB76241D6F8B910051CEFF /* EnemyLayer.swift */; };
 		9EEB76281D71ED0D0051CEFF /* PhysiksContactManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEB76271D71ED0D0051CEFF /* PhysiksContactManager.swift */; };
+		9EEB762C1D71F8490051CEFF /* FoundationExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEB762B1D71F8490051CEFF /* FoundationExtensions.swift */; };
+		9EEB762F1D7213370051CEFF /* MothershipNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEB762E1D7213370051CEFF /* MothershipNode.swift */; };
 		9EF3AD501D69CF9800E6C1FA /* CGVectorExtensions.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF3AD4F1D69CF9800E6C1FA /* CGVectorExtensions.swift.swift */; };
 /* End PBXBuildFile section */
 
@@ -68,6 +70,8 @@
 		9EEB76211D6F89D10051CEFF /* EnemyNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnemyNode.swift; sourceTree = "<group>"; };
 		9EEB76241D6F8B910051CEFF /* EnemyLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EnemyLayer.swift; sourceTree = "<group>"; };
 		9EEB76271D71ED0D0051CEFF /* PhysiksContactManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhysiksContactManager.swift; sourceTree = "<group>"; };
+		9EEB762B1D71F8490051CEFF /* FoundationExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoundationExtensions.swift; sourceTree = "<group>"; };
+		9EEB762E1D7213370051CEFF /* MothershipNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MothershipNode.swift; sourceTree = "<group>"; };
 		9EF3AD4F1D69CF9800E6C1FA /* CGVectorExtensions.swift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGVectorExtensions.swift.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -119,6 +123,7 @@
 		9E9550081D5CFCE80069EAFD /* outercept */ = {
 			isa = PBXGroup;
 			children = (
+				9EEB762D1D7213140051CEFF /* Mothership */,
 				9EEB76261D71ECDD0051CEFF /* Physics */,
 				9EEB76231D6F8A530051CEFF /* Enemy */,
 				9EF3AD4E1D69CF7700E6C1FA /* Extenstions */,
@@ -182,10 +187,19 @@
 			name = Physics;
 			sourceTree = "<group>";
 		};
+		9EEB762D1D7213140051CEFF /* Mothership */ = {
+			isa = PBXGroup;
+			children = (
+				9EEB762E1D7213370051CEFF /* MothershipNode.swift */,
+			);
+			name = Mothership;
+			sourceTree = "<group>";
+		};
 		9EF3AD4E1D69CF7700E6C1FA /* Extenstions */ = {
 			isa = PBXGroup;
 			children = (
 				9EF3AD4F1D69CF9800E6C1FA /* CGVectorExtensions.swift.swift */,
+				9EEB762B1D71F8490051CEFF /* FoundationExtensions.swift */,
 			);
 			name = Extenstions;
 			sourceTree = "<group>";
@@ -336,7 +350,9 @@
 				9EEB76251D6F8B910051CEFF /* EnemyLayer.swift in Sources */,
 				9EEB76281D71ED0D0051CEFF /* PhysiksContactManager.swift in Sources */,
 				9E9550121D5CFCE90069EAFD /* GameViewController.swift in Sources */,
+				9EEB762F1D7213370051CEFF /* MothershipNode.swift in Sources */,
 				9EEB76221D6F89D10051CEFF /* EnemyNode.swift in Sources */,
+				9EEB762C1D71F8490051CEFF /* FoundationExtensions.swift in Sources */,
 				9E95500A1D5CFCE90069EAFD /* AppDelegate.swift in Sources */,
 				9E053F031D69E9FD00389DB6 /* InterceptorNode.swift in Sources */,
 				9EA630A91D681C1500D0A72E /* StrokeNode.swift in Sources */,
