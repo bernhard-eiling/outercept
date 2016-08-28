@@ -11,26 +11,39 @@ import GameplayKit
 
 class GameScene: SKScene {
     
-    let interceptionsLayer = InterceptionsLayer()
     let physicsContactManager = PhysiksContactManager()
-    var enemyLayer = EnemyLayer()
     var currentInterception: Interception?
+    let mothership = MothershipNode()
+    let maxNumberInterceptions = 3
+    var currentNumberInterceptions = 0
     
     override func didMove(to view: SKView) {
         physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         physicsWorld.contactDelegate = physicsContactManager
         anchorPoint = CGPoint(x: 0, y: 0)
-        addChild(interceptionsLayer)
-        addChild(enemyLayer)
-        let mothership = MothershipNode()
+        
         addChild(mothership)
         mothership.setup()
-        enemyLayer.setup()
+        
+        for _ in 0...2 {
+            let enemy = EnemyNode()
+            addChild(enemy)
+            enemy.reset()
+        }
+        
+        for _ in 0...10 {
+            let asteroid = AsteroidNode()
+            addChild(asteroid)
+            asteroid.reset()
+        }
     }
     
     func touchDown(atPoint point : CGPoint) {
-        currentInterception = Interception(withStartPoint: point)
-        interceptionsLayer.addNode(interception: currentInterception!)
+        if mothership.contains(point) {
+            guard currentNumberInterceptions < maxNumberInterceptions else { return }
+            currentInterception = Interception(withStartPoint: point)
+            addChild(currentInterception!)
+        }
     }
     
     func touchMoved(toPoint point : CGPoint) {
@@ -39,10 +52,11 @@ class GameScene: SKScene {
     
     func touchUp(atPoint point : CGPoint) {
         currentInterception?.startInterceptor()
+        currentInterception = nil
     }
     
     override func update(_ currentTime: TimeInterval) {
-        interceptionsLayer.update()
+
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

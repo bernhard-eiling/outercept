@@ -11,12 +11,6 @@ import SpriteKit
 class Interception: SKNode {
     
     private let strokeNode: StrokeNode
-    var interceptorNode: InterceptorNode?
-    
-    var isInterceptionFinished: Bool {
-        guard let interceptor = interceptorNode else { return false }
-        return interceptor.frame.contains(interceptor.endPosition)
-    }
     
     init(withStartPoint startPoint: CGPoint) {
         strokeNode = StrokeNode(withPoint: startPoint)
@@ -25,11 +19,12 @@ class Interception: SKNode {
     }
     
     func startInterceptor() {
-        guard let currentPoint = strokeNode.path?.currentPoint else { return }
-        interceptorNode = InterceptorNode(withEndPosition: currentPoint)
-        addChild(interceptorNode!)
+        let interceptorNode = InterceptorNode()
+        addChild(interceptorNode)
         let followAction = SKAction.follow(strokeNode.path!, speed: 150)
-        interceptorNode!.run(followAction)
+        interceptorNode.run(followAction, completion: {
+            self.removeFromParent()
+        })
     }
     
     func add(point: CGPoint) {

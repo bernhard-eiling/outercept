@@ -10,12 +10,9 @@ import SpriteKit
 
 class InterceptorNode: SKSpriteNode {
     
-    let endPosition: CGPoint
-    
-    init(withEndPosition position: CGPoint) {
+    init() {
         let texture = SKTexture(imageNamed: "Spaceship")
         let size = CGSize(width: 30, height: 30)
-        endPosition = position
         super.init(texture: texture, color: UIColor.blue, size: size)
         physicsBody = SKPhysicsBody(circleOfRadius: 15)
         physicsBody?.categoryBitMask = PhysicsBitmask.interceptor

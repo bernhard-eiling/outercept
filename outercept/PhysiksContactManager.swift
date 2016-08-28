@@ -13,6 +13,7 @@ struct PhysicsBitmask {
     static let interceptor: UInt32 = 0b01
     static let enemy: UInt32 = 0b10
     static let mothership: UInt32 = 0b11
+    static let asteriod: UInt32 = 0b100
 }
 
 class PhysiksContactManager: NSObject, SKPhysicsContactDelegate {
