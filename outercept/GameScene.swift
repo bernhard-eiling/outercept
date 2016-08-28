@@ -15,7 +15,6 @@ class GameScene: SKScene {
     var currentInterception: Interception?
     let mothership = MothershipNode()
     let maxNumberInterceptions = 3
-    var currentNumberInterceptions = 0
     
     override func didMove(to view: SKView) {
         physicsWorld.gravity = CGVector(dx: 0, dy: 0)
@@ -40,6 +39,7 @@ class GameScene: SKScene {
     
     func touchDown(atPoint point : CGPoint) {
         if mothership.contains(point) {
+            let currentNumberInterceptions = self["interception"].count
             guard currentNumberInterceptions < maxNumberInterceptions else { return }
             currentInterception = Interception(withStartPoint: point)
             addChild(currentInterception!)

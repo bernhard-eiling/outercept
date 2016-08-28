@@ -15,6 +15,7 @@ class Interception: SKNode {
     init(withStartPoint startPoint: CGPoint) {
         strokeNode = StrokeNode(withPoint: startPoint)
         super.init()
+        name = "interception"
         addChild(strokeNode)
     }
     

@@ -10,12 +10,10 @@ import SpriteKit
 
 class StrokeNode: SKShapeNode {
     
-    let startPoint: CGPoint
-    let maxLenght: CGFloat = 350
-    var currentLenght: CGFloat = 0
+    let maxLength: CGFloat = 350
+    var currentLength: CGFloat = 0
     
     init(withPoint point: CGPoint) {
-        startPoint = point
         super.init()
         let path = CGMutablePath()
         path.moveTo(nil, x: point.x, y: point.y)
@@ -26,11 +24,17 @@ class StrokeNode: SKShapeNode {
         guard let mutablePath = path as! CGMutablePath? else { return }
         let nextVector = CGVector.vector(fromPoint: mutablePath.currentPoint, andPoint: point)
         let nextVectorLength = nextVector.length()
-        if currentLenght + nextVectorLength < maxLenght {
-            currentLenght += nextVectorLength
+        if currentLength + nextVectorLength < maxLength { // stroke under max length
+            currentLength += nextVectorLength
             mutablePath.addLineTo(nil, x: point.x, y: point.y)
-            path = mutablePath
+        } else { // stroke over max length
+            let lengthToMax = maxLength - currentLength
+            let vectorToMax = nextVector.vector(withLength: lengthToMax)
+            let pointToMax = CGPoint(x: vectorToMax.dx + mutablePath.currentPoint.x, y: vectorToMax.dy + mutablePath.currentPoint.y)
+            currentLength += lengthToMax
+            mutablePath.addLineTo(nil, x: pointToMax.x, y: pointToMax.y)
         }
+        path = mutablePath
     }
     
     required init?(coder aDecoder: NSCoder) {

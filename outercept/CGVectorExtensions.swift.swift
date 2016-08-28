@@ -14,8 +14,13 @@ extension CGVector {
         return CGVector(dx: secondPoint.x - firstPoint.x, dy: secondPoint.y - firstPoint.y)
     }
     
+    func vector(withLength targetlength: CGFloat) -> CGVector {
+        let scale = targetlength / length()
+        return CGVector(dx: dx * scale, dy: dy * scale)
+    }
+    
     func length() -> CGFloat {
-        return sqrt(abs(dx) * abs(dy))
+        return sqrt(dx * dx + dy * dy)
     }
     
 }
