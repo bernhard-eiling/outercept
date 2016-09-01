@@ -27,7 +27,10 @@ class PhysiksContactManager: NSObject, SKPhysicsContactDelegate {
         }
         if nodeA is EnemyNode && nodeB is InterceptorNode {
             let enemyNode = nodeA as! EnemyNode
-            enemyNode.reset()
+            let interceptor = nodeB as! InterceptorNode
+            let gunOrientation = SKConstraint.orient(to: enemyNode, offset: SKRange(constantValue: CGFloat(M_2_PI*7)))
+            interceptor.gun.constraints = [gunOrientation]
+//            enemyNode.reset()
         }
     }
     

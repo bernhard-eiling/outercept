@@ -12,11 +12,12 @@ class MothershipNode: SKSpriteNode {
     
     init() {
         let size = CGSize(width: 80, height: 130)
-        super.init(texture: nil, color: UIColor.white, size: size)
+        super.init(texture: nil, color: UIColor.gray, size: size)
         physicsBody = SKPhysicsBody(rectangleOf: size)
         physicsBody?.categoryBitMask = PhysicsBitmask.mothership
         physicsBody?.contactTestBitMask = PhysicsBitmask.enemy
         physicsBody?.collisionBitMask = PhysicsBitmask.none
+        name = "mothership"
     }
     
     func setup() {

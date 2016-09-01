@@ -10,9 +10,19 @@ import SpriteKit
 
 class EnemyNode: SKSpriteNode {
     
+    private var enemyPhysicsBody: SKPhysicsBody {
+        let physicsBody = SKPhysicsBody(circleOfRadius: size.width / 2)
+        physicsBody.categoryBitMask = PhysicsBitmask.enemy
+        physicsBody.contactTestBitMask = PhysicsBitmask.interceptor
+        physicsBody.collisionBitMask = PhysicsBitmask.none
+        physicsBody.isDynamic = false
+        return physicsBody
+    }
+    
     init() {
         let size = CGSize(width: 30, height: 30)
         super.init(texture: nil, color: UIColor.red, size: size)
+        name = "enemy"
     }
     
     func reset() {
@@ -21,7 +31,7 @@ class EnemyNode: SKSpriteNode {
         physicsBody = nil
         removeAllActions()
         position = randomStartPosition
-        physicsBody = enemyPhysicsBody()
+        physicsBody = enemyPhysicsBody
         run(moveToCenterAction)
     }
     
@@ -38,15 +48,6 @@ class EnemyNode: SKSpriteNode {
             y = Bool.random ? -frame.size.height : scene.size.height + frame.size.height
         }
         return CGPoint(x: x, y: y)
-    }
-    
-    private func enemyPhysicsBody() -> SKPhysicsBody {
-        let physicsBody = SKPhysicsBody(circleOfRadius: size.width / 2)
-        physicsBody.categoryBitMask = PhysicsBitmask.enemy
-        physicsBody.contactTestBitMask = PhysicsBitmask.interceptor
-        physicsBody.collisionBitMask = PhysicsBitmask.none
-        physicsBody.isDynamic = false
-        return physicsBody
     }
     
     private func moveToCenterAction() -> SKAction? {

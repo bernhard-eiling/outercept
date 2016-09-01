@@ -8,16 +8,27 @@
 
 import SpriteKit
 
-class InterceptorNode: SKSpriteNode {
+class InterceptorNode: SKNode {
     
-    init() {
-        let texture = SKTexture(imageNamed: "Spaceship")
-        let size = CGSize(width: 30, height: 30)
-        super.init(texture: texture, color: UIColor.blue, size: size)
-        physicsBody = SKPhysicsBody(circleOfRadius: 15)
-        physicsBody?.categoryBitMask = PhysicsBitmask.interceptor
-        physicsBody?.contactTestBitMask = PhysicsBitmask.enemy
-        physicsBody?.collisionBitMask = PhysicsBitmask.none
+    let gun = SKSpriteNode(texture: nil, color: UIColor.yellow, size: CGSize(width: 4, height: 50))
+    private let body = SKSpriteNode(texture: SKTexture(imageNamed: "Spaceship"), color: UIColor.blue, size: CGSize(width: 30, height: 30))
+
+    private var interceptorPhysicsBody: SKPhysicsBody? {
+        let interceptorPhysicsBody = SKPhysicsBody(circleOfRadius: 70)
+        interceptorPhysicsBody.categoryBitMask = PhysicsBitmask.interceptor
+        interceptorPhysicsBody.contactTestBitMask = PhysicsBitmask.enemy
+        interceptorPhysicsBody.collisionBitMask = PhysicsBitmask.none
+        return interceptorPhysicsBody
+    }
+        
+    override init() {
+        super.init()
+        physicsBody = interceptorPhysicsBody
+        name = "interceptor"
+        gun.zPosition = 1
+        body.zPosition = 0
+        addChild(body)
+        addChild(gun)
     }
 
     required init?(coder aDecoder: NSCoder) {

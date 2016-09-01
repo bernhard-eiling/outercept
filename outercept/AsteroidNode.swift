@@ -10,9 +10,19 @@ import SpriteKit
 
 class AsteroidNode: SKSpriteNode {
     
+    private var asteroidPhysicsBody: SKPhysicsBody {
+        let physicsBody = SKPhysicsBody(circleOfRadius: size.width / 2)
+        physicsBody.categoryBitMask = PhysicsBitmask.asteriod
+        physicsBody.contactTestBitMask = PhysicsBitmask.interceptor
+        physicsBody.collisionBitMask = PhysicsBitmask.none
+        physicsBody.isDynamic = false
+        return physicsBody
+    }
+    
     init() {
         let size = CGSize(width: 60, height: 60)
         super.init(texture: nil, color: UIColor.brown, size: size)
+        name = "asteroid"
     }
     
     func reset() {
@@ -21,7 +31,7 @@ class AsteroidNode: SKSpriteNode {
         physicsBody = nil
         removeAllActions()
         position = randomStartPosition
-        physicsBody = asteroidPhysicsBody()
+        physicsBody = asteroidPhysicsBody
         run(moveToBottomAction)
     }
     
@@ -29,15 +39,6 @@ class AsteroidNode: SKSpriteNode {
         guard let scene = scene else { return nil }
         let x = CGFloat(arc4random_uniform(UInt32(scene.size.width)))
         return CGPoint(x: x, y: frame.size.height)
-    }
-    
-    private func asteroidPhysicsBody() -> SKPhysicsBody {
-        let physicsBody = SKPhysicsBody(circleOfRadius: size.width / 2)
-        physicsBody.categoryBitMask = PhysicsBitmask.asteriod
-        physicsBody.contactTestBitMask = PhysicsBitmask.interceptor
-        physicsBody.collisionBitMask = PhysicsBitmask.none
-        physicsBody.isDynamic = false
-        return physicsBody
     }
     
     private func moveToBottomAction() -> SKAction? {
