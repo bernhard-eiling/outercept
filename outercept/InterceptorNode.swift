@@ -14,7 +14,7 @@ class InterceptorNode: SKNode {
     private let shotSpeed = 10.0 // seconds to cross diameter of scene
     private let fireDiameter: CGFloat = 150
     private let bodySize = CGSize(width: 30, height: 30)
-    private let gunSize = CGSize(width: 4, height: 133)
+    private let gunSize = CGSize(width: 4, height: 13)
     private let gunRangeIndicatorColor = UIColor(colorLiteralRed: 0.1, green: 0.3, blue: 1.0, alpha: 0.1)
     
     private let gun: SKSpriteNode
@@ -76,6 +76,7 @@ class InterceptorNode: SKNode {
             let targetVector = globalGunDirection.vector(withLength: sceneDiameter)
             let targetPosition = self.position + targetVector.point
             shot.position = self.position
+            shot.zRotation = globalGunDirection.radians()
             let moveAction = SKAction.move(to: targetPosition, duration: TimeInterval(self.shotSpeed))
             self.scene?.addChild(shot)
             shot.run(moveAction)

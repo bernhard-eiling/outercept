@@ -48,4 +48,8 @@ extension CGVector {
         return sqrt(dx * dx + dy * dy)
     }
     
+    func radians() -> CGFloat {
+        return atan2(dy, dx)
+    }
+    
 }

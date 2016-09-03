@@ -10,6 +10,9 @@ import SpriteKit
 
 class EnemyNode: SKSpriteNode {
     
+    private let maxHealth = 5
+    private var health: Int
+    
     private var enemyPhysicsBody: SKPhysicsBody {
         let physicsBody = SKPhysicsBody(circleOfRadius: size.width / 2)
         physicsBody.categoryBitMask = PhysicsBitmask.enemy
@@ -21,6 +24,7 @@ class EnemyNode: SKSpriteNode {
     
     init() {
         let size = CGSize(width: 30, height: 30)
+        health = maxHealth
         super.init(texture: SKTexture(image: UIImage.circle(withDiameter: 30, andColor: UIColor.red)), color: UIColor.red, size: size)
         name = "enemy"
     }
@@ -32,7 +36,15 @@ class EnemyNode: SKSpriteNode {
         removeAllActions()
         position = randomStartPosition
         physicsBody = enemyPhysicsBody
+        health = maxHealth
         run(moveToCenterAction)
+    }
+    
+    func takeDamage(damage: Int) {
+        health -= damage
+        if health <= 0 {
+            reset()
+        }
     }
     
     private func randomStartPosition() -> CGPoint? {

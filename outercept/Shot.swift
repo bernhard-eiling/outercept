@@ -10,6 +10,8 @@ import SpriteKit
 
 class ShotNode: SKSpriteNode {
     
+    let damage = 1
+    
     private var shotPhysicsBody: SKPhysicsBody {
         let physicsBody = SKPhysicsBody(circleOfRadius: size.width / 2)
         physicsBody.categoryBitMask = PhysicsBitmask.shot
@@ -20,7 +22,7 @@ class ShotNode: SKSpriteNode {
     }
     
     init(lifetime: Double) {
-        let size = CGSize(width: 3, height: 3)
+        let size = CGSize(width: 10, height: 1)
         super.init(texture: nil, color: UIColor.orange, size: size)
         name = "shot"
         physicsBody = shotPhysicsBody
