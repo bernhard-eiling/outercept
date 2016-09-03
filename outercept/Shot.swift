@@ -19,11 +19,16 @@ class ShotNode: SKSpriteNode {
         return physicsBody
     }
     
-    init() {
+    init(lifetime: Double) {
         let size = CGSize(width: 3, height: 3)
         super.init(texture: nil, color: UIColor.orange, size: size)
         name = "shot"
         physicsBody = shotPhysicsBody
+        let removeAction = SKAction.sequence([
+            SKAction.wait(forDuration: lifetime),
+            SKAction.removeFromParent()
+            ])
+        run(removeAction)
     }
 
     required init?(coder aDecoder: NSCoder) {

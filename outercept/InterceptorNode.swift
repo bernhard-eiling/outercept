@@ -11,7 +11,7 @@ import SpriteKit
 class InterceptorNode: SKNode {
     
     private let fireRate = 0.3
-    private let shotSpeed = 10 // seconds to cross diameter of scene
+    private let shotSpeed = 10.0 // seconds to cross diameter of scene
     private let fireDiameter: CGFloat = 150
     private let bodySize = CGSize(width: 30, height: 30)
     private let gunSize = CGSize(width: 4, height: 133)
@@ -34,9 +34,6 @@ class InterceptorNode: SKNode {
     
     deinit {
         fireTimer?.invalidate()
-        for shot in shots {
-            shot.removeFromParent()
-        }
     }
         
     override init() {
@@ -44,7 +41,7 @@ class InterceptorNode: SKNode {
         body = SKSpriteNode(texture: SKTexture(imageNamed: "Spaceship"), color: UIColor.blue, size: bodySize)
         let gunRangeIndicatorImage = UIImage.circle(withDiameter: fireDiameter, andColor: gunRangeIndicatorColor)
         let gunRangeIndicator = SKSpriteNode(texture: SKTexture(image: gunRangeIndicatorImage))
-        shot = ShotNode()
+        shot = ShotNode(lifetime: shotSpeed)
         super.init()
         physicsBody = interceptorPhysicsBody
         name = "interceptor"
@@ -66,14 +63,13 @@ class InterceptorNode: SKNode {
     func resetGun() {
         fireTimer?.invalidate()
         gun.constraints = nil
-        gun.zRotation = 0;
+        gun.zRotation = 0
     }
 
     private func fireGun(atNode node: SKNode) {
         fireTimer = Timer.scheduledTimer(withTimeInterval: fireRate, repeats: true, block: { _ in
             guard let scene = self.scene else { return }
-            let shot = self.shot.copy() as! ShotNode
-            self.shots.append(shot)
+            let shot = ShotNode(lifetime: self.shotSpeed)
             let sceneDiameter = CGVector(dx: scene.size.width, dy: scene.size.height).length()
             let gunDirection = CGVector.vector(fromRadians: self.gun.zRotation)
             let globalGunDirection = gunDirection.rotated(byRadians: self.zRotation)
