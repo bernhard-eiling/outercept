@@ -30,11 +30,11 @@ class GameScene: SKScene {
             enemy.reset()
         }
         
-        for _ in 0...10 {
-            let asteroid = AsteroidNode()
-            addChild(asteroid)
-            asteroid.reset()
-        }
+//        for _ in 0...10 {
+//            let asteroid = AsteroidNode()
+//            addChild(asteroid)
+//            asteroid.reset()
+//        }
     }
     
     func touchDown(atPoint point : CGPoint) {

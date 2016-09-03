@@ -21,7 +21,7 @@ class EnemyNode: SKSpriteNode {
     
     init() {
         let size = CGSize(width: 30, height: 30)
-        super.init(texture: nil, color: UIColor.red, size: size)
+        super.init(texture: SKTexture(image: UIImage.circle(withDiameter: 30, andColor: UIColor.red)), color: UIColor.red, size: size)
         name = "enemy"
     }
     

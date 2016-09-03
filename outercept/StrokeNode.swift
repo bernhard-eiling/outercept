@@ -22,7 +22,7 @@ class StrokeNode: SKShapeNode {
 
     func addPoint(point: CGPoint) {
         guard let mutablePath = path as! CGMutablePath? else { return }
-        let nextVector = CGVector.vector(fromPoint: mutablePath.currentPoint, andPoint: point)
+        let nextVector = CGVector.vector(fromPoint: mutablePath.currentPoint, toPoint: point)
         let nextVectorLength = nextVector.length()
         var newLinePoint = point
         if currentLength + nextVectorLength < maxLength { // stroke under max length

@@ -22,7 +22,7 @@ class Interception: SKNode {
     func startInterceptor() {
         let interceptorNode = InterceptorNode()
         addChild(interceptorNode)
-        let followAction = SKAction.follow(strokeNode.path!, speed: 150)
+        let followAction = SKAction.follow(strokeNode.path!, speed: 70)
         interceptorNode.run(followAction, completion: {
             self.removeFromParent()
         })

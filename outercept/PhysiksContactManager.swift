@@ -14,23 +14,26 @@ struct PhysicsBitmask {
     static let enemy: UInt32 = 0b10
     static let mothership: UInt32 = 0b11
     static let asteriod: UInt32 = 0b100
+    static let shot: UInt32 = 0b101
 }
 
 class PhysiksContactManager: NSObject, SKPhysicsContactDelegate {
     
     func didBegin(_ contact: SKPhysicsContact) {
-        let nodeA = contact.bodyA.node
-        let nodeB = contact.bodyB.node
-        if nodeA is MothershipNode && nodeB is EnemyNode {
-            let enemyNode = nodeB as! EnemyNode
-            enemyNode.reset()
+        if let enemy = contact.bodyB.node as? EnemyNode,
+            contact.bodyA.node is MothershipNode  {
+            enemy.reset()
         }
-        if nodeA is EnemyNode && nodeB is InterceptorNode {
-            let enemyNode = nodeA as! EnemyNode
-            let interceptor = nodeB as! InterceptorNode
-            let gunOrientation = SKConstraint.orient(to: enemyNode, offset: SKRange(constantValue: CGFloat(M_2_PI*7)))
-            interceptor.gun.constraints = [gunOrientation]
-//            enemyNode.reset()
+        if let enemy = contact.bodyA.node as? EnemyNode,
+            let interceptor = contact.bodyB.node as? InterceptorNode {
+            interceptor.gun(followsNode: enemy)
+        }
+    }
+    
+    func didEnd(_ contact: SKPhysicsContact) {
+        if let enemy = contact.bodyA.node as? EnemyNode,
+            let interceptor = contact.bodyB.node as? InterceptorNode {
+            interceptor.resetGun()
         }
     }
     
