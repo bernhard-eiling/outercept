@@ -28,6 +28,7 @@
 		9EEB76371D78CF990051CEFF /* Shot.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEB76361D78CF990051CEFF /* Shot.swift */; };
 		9EEB76401D7B57920051CEFF /* CGPointExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEB763F1D7B57920051CEFF /* CGPointExtensions.swift */; };
 		9EEB76421D7B60DF0051CEFF /* UIImageExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEB76411D7B60DF0051CEFF /* UIImageExtensions.swift */; };
+		9EEB76451D7BA55A0051CEFF /* Gunship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EEB76441D7BA55A0051CEFF /* Gunship.swift */; };
 		9EF3AD501D69CF9800E6C1FA /* CGVectorExtensions.swift.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9EF3AD4F1D69CF9800E6C1FA /* CGVectorExtensions.swift.swift */; };
 /* End PBXBuildFile section */
 
@@ -76,6 +77,7 @@
 		9EEB76361D78CF990051CEFF /* Shot.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shot.swift; sourceTree = "<group>"; };
 		9EEB763F1D7B57920051CEFF /* CGPointExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGPointExtensions.swift; sourceTree = "<group>"; };
 		9EEB76411D7B60DF0051CEFF /* UIImageExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtensions.swift; sourceTree = "<group>"; };
+		9EEB76441D7BA55A0051CEFF /* Gunship.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Gunship.swift; sourceTree = "<group>"; };
 		9EF3AD4F1D69CF9800E6C1FA /* CGVectorExtensions.swift.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CGVectorExtensions.swift.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -127,6 +129,7 @@
 		9E9550081D5CFCE80069EAFD /* outercept */ = {
 			isa = PBXGroup;
 			children = (
+				9EEB76431D7BA4520051CEFF /* Protocols */,
 				9EEB762D1D7213140051CEFF /* Mothership */,
 				9EEB76261D71ECDD0051CEFF /* Physics */,
 				9EEB76231D6F8A530051CEFF /* Enemy */,
@@ -197,6 +200,14 @@
 				9EEB762E1D7213370051CEFF /* MothershipNode.swift */,
 			);
 			name = Mothership;
+			sourceTree = "<group>";
+		};
+		9EEB76431D7BA4520051CEFF /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				9EEB76441D7BA55A0051CEFF /* Gunship.swift */,
+			);
+			name = Protocols;
 			sourceTree = "<group>";
 		};
 		9EF3AD4E1D69CF7700E6C1FA /* Extenstions */ = {
@@ -355,6 +366,7 @@
 				9EEB76311D7235880051CEFF /* AsteroidNode.swift in Sources */,
 				9EEB76281D71ED0D0051CEFF /* PhysiksContactManager.swift in Sources */,
 				9E9550121D5CFCE90069EAFD /* GameViewController.swift in Sources */,
+				9EEB76451D7BA55A0051CEFF /* Gunship.swift in Sources */,
 				9EEB762F1D7213370051CEFF /* MothershipNode.swift in Sources */,
 				9EEB76221D6F89D10051CEFF /* EnemyNode.swift in Sources */,
 				9EEB762C1D71F8490051CEFF /* FoundationExtensions.swift in Sources */,

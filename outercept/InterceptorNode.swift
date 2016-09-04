@@ -8,7 +8,7 @@
 
 import SpriteKit
 
-class InterceptorNode: SKNode {
+class InterceptorNode: SKNode, Gunship {
     
     private let fireRate = 0.3
     private let shotSpeed = 10.0 // seconds to cross diameter of scene
@@ -19,7 +19,6 @@ class InterceptorNode: SKNode {
     
     private let gun: SKSpriteNode
     private let body: SKSpriteNode
-    private let shot: ShotNode
     private var shots: [ShotNode] = []
     
     private var fireTimer: Timer?
@@ -41,7 +40,6 @@ class InterceptorNode: SKNode {
         body = SKSpriteNode(texture: SKTexture(imageNamed: "Spaceship"), color: UIColor.blue, size: bodySize)
         let gunRangeIndicatorImage = UIImage.circle(withDiameter: fireDiameter, andColor: gunRangeIndicatorColor)
         let gunRangeIndicator = SKSpriteNode(texture: SKTexture(image: gunRangeIndicatorImage))
-        shot = ShotNode(lifetime: shotSpeed)
         super.init()
         physicsBody = interceptorPhysicsBody
         name = "interceptor"
@@ -57,7 +55,6 @@ class InterceptorNode: SKNode {
     func gun(followsNode node: SKNode) {
         let gunOrientation = SKConstraint.orient(to: node, offset: SKRange(constantValue: CGFloat(-M_PI_2)))
         gun.constraints = [gunOrientation]
-        fireGun(atNode: node)
     }
     
     func resetGun() {
@@ -66,10 +63,11 @@ class InterceptorNode: SKNode {
         gun.zRotation = 0
     }
 
-    private func fireGun(atNode node: SKNode) {
+    func fireGun(atNode node: SKNode) {
+        fireTimer?.invalidate()
         fireTimer = Timer.scheduledTimer(withTimeInterval: fireRate, repeats: true, block: { _ in
             guard let scene = self.scene else { return }
-            let shot = ShotNode(lifetime: self.shotSpeed)
+            let shot = ShotNode(withGunship: self, andLifetime: self.shotSpeed)
             let sceneDiameter = CGVector(dx: scene.size.width, dy: scene.size.height).length()
             let gunDirection = CGVector.vector(fromRadians: self.gun.zRotation)
             let globalGunDirection = gunDirection.rotated(byRadians: self.zRotation)

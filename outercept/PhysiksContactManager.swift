@@ -27,10 +27,14 @@ class PhysiksContactManager: NSObject, SKPhysicsContactDelegate {
         if let enemy = contact.bodyA.node as? EnemyNode,
             let interceptor = contact.bodyB.node as? InterceptorNode {
             interceptor.gun(followsNode: enemy)
+            interceptor.fireGun(atNode: enemy)
         }
         if let enemy = contact.bodyA.node as? EnemyNode,
             let shot = contact.bodyB.node as? ShotNode {
-            enemy.takeDamage(damage: shot.damage)
+            let destroyed = enemy.takeDamage(damage: shot.damage)
+            if destroyed {
+                shot.gunship.resetGun()
+            }
         }
     }
     

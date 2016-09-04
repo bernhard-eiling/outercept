@@ -11,6 +11,7 @@ import SpriteKit
 class ShotNode: SKSpriteNode {
     
     let damage = 1
+    let gunship: Gunship
     
     private var shotPhysicsBody: SKPhysicsBody {
         let physicsBody = SKPhysicsBody(circleOfRadius: size.width / 2)
@@ -21,8 +22,9 @@ class ShotNode: SKSpriteNode {
         return physicsBody
     }
     
-    init(lifetime: Double) {
+    init(withGunship ship: Gunship, andLifetime lifetime: Double) {
         let size = CGSize(width: 10, height: 1)
+        gunship = ship
         super.init(texture: nil, color: UIColor.orange, size: size)
         name = "shot"
         physicsBody = shotPhysicsBody

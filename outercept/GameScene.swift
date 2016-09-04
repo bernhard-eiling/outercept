@@ -24,7 +24,7 @@ class GameScene: SKScene {
         addChild(mothership)
         mothership.setup()
         
-        for _ in 0...2 {
+        for _ in 0...4 {
             let enemy = EnemyNode()
             addChild(enemy)
             enemy.reset()

@@ -12,6 +12,7 @@ class EnemyNode: SKSpriteNode {
     
     private let maxHealth = 5
     private var health: Int
+    private let takeDamageAction: SKAction
     
     private var enemyPhysicsBody: SKPhysicsBody {
         let physicsBody = SKPhysicsBody(circleOfRadius: size.width / 2)
@@ -24,6 +25,10 @@ class EnemyNode: SKSpriteNode {
     
     init() {
         let size = CGSize(width: 30, height: 30)
+        takeDamageAction = SKAction.sequence([
+            SKAction.fadeAlpha(to: 0.5, duration: TimeInterval(0.05)),
+            SKAction.fadeAlpha(to: 1.0, duration: TimeInterval(0.05))
+            ])
         health = maxHealth
         super.init(texture: SKTexture(image: UIImage.circle(withDiameter: 30, andColor: UIColor.red)), color: UIColor.red, size: size)
         name = "enemy"
@@ -40,11 +45,14 @@ class EnemyNode: SKSpriteNode {
         run(moveToCenterAction)
     }
     
-    func takeDamage(damage: Int) {
+    func takeDamage(damage: Int) -> Bool {
+        run(takeDamageAction)
         health -= damage
         if health <= 0 {
             reset()
+            return true
         }
+        return false
     }
     
     private func randomStartPosition() -> CGPoint? {
@@ -64,7 +72,7 @@ class EnemyNode: SKSpriteNode {
     
     private func moveToCenterAction() -> SKAction? {
         guard let scene = scene else { return nil }
-        let randomTimeInterval = Double(arc4random_uniform(2) + 8)
+        let randomTimeInterval = Double(arc4random_uniform(5) + 8)
         let center = CGPoint(x: scene.frame.width / 2, y: scene.frame.height / 2)
         return SKAction.move(to: center, duration: randomTimeInterval)
     }
