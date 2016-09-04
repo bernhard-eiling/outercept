@@ -10,7 +10,7 @@ import SpriteKit
 
 class EnemyNode: SKSpriteNode {
     
-    private let maxHealth = 5
+    private let maxHealth = 2
     private var health: Int
     private let takeDamageAction: SKAction
     private let baseSpeed: UInt32 = 10

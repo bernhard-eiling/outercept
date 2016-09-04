@@ -34,8 +34,7 @@ class PhysiksContactManager: NSObject, SKPhysicsContactDelegate {
         }
         if let enemy = contact.bodyA.node as? EnemyNode,
             let interceptor = contact.bodyB.node as? InterceptorNode {
-            interceptor.gun(followsNode: enemy)
-            interceptor.fireGun(atNode: enemy)
+            interceptor.shootGun(atNode: enemy)
         }
         if let enemy = contact.bodyA.node as? EnemyNode,
             let shot = contact.bodyB.node as? ShotNode {
@@ -45,14 +44,14 @@ class PhysiksContactManager: NSObject, SKPhysicsContactDelegate {
                 enemy.removeFromParent()
                 let newEnemy = EnemyNode(withSceneSize: scene.size)
                 scene.addChild(newEnemy)
-                
             }
+            shot.removeFromParent()
         }
     }
     
     func didEnd(_ contact: SKPhysicsContact) {
         if let interceptor = contact.bodyB.node as? InterceptorNode,
-            contact.bodyA.node is EnemyNode{
+            contact.bodyA.node is EnemyNode {
             interceptor.resetGun()
         }
     }

@@ -10,8 +10,7 @@ import SpriteKit
 
 protocol Gunship {
     
-    func gun(followsNode node: SKNode)
-    func fireGun(atNode node: SKNode)
+    func shootGun(atNode node: SKNode)
     func resetGun()
     
 }
