@@ -29,8 +29,8 @@ class PhysiksContactManager: NSObject, SKPhysicsContactDelegate {
         if let enemy = contact.bodyB.node as? EnemyNode,
             contact.bodyA.node is MothershipNode  {
             enemy.removeFromParent()
-            let enemy = EnemyNode(withSceneSize: scene.size)
-            scene.addChild(enemy)
+            let newEnemy = EnemyNode(withSceneSize: scene.size)
+            scene.addChild(newEnemy)
         }
         if let enemy = contact.bodyA.node as? EnemyNode,
             let interceptor = contact.bodyB.node as? InterceptorNode {
@@ -42,13 +42,17 @@ class PhysiksContactManager: NSObject, SKPhysicsContactDelegate {
             let destroyed = enemy.takeDamage(damage: shot.damage)
             if destroyed {
                 shot.gunship.resetGun()
+                enemy.removeFromParent()
+                let newEnemy = EnemyNode(withSceneSize: scene.size)
+                scene.addChild(newEnemy)
+                
             }
         }
     }
     
     func didEnd(_ contact: SKPhysicsContact) {
-        if let enemy = contact.bodyA.node as? EnemyNode,
-            let interceptor = contact.bodyB.node as? InterceptorNode {
+        if let interceptor = contact.bodyB.node as? InterceptorNode,
+            contact.bodyA.node is EnemyNode{
             interceptor.resetGun()
         }
     }

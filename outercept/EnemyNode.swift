@@ -13,7 +13,7 @@ class EnemyNode: SKSpriteNode {
     private let maxHealth = 5
     private var health: Int
     private let takeDamageAction: SKAction
-    private let baseSpeed: UInt32 = 8
+    private let baseSpeed: UInt32 = 10
     private let speedVariance: UInt32 = 4
     
     private var enemyPhysicsBody: SKPhysicsBody {
@@ -43,8 +43,7 @@ class EnemyNode: SKSpriteNode {
     func takeDamage(damage: Int) -> Bool {
         run(takeDamageAction)
         health -= damage
-        if health <= 0 {
-            removeFromParent()
+        if health <= 0 { 
             return true
         }
         return false

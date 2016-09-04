@@ -30,10 +30,6 @@ class InterceptorNode: SKNode, Gunship {
         interceptorPhysicsBody.collisionBitMask = PhysicsBitmask.none
         return interceptorPhysicsBody
     }
-    
-    deinit {
-        fireTimer?.invalidate()
-    }
         
     override init() {
         gun = SKSpriteNode(texture: nil, color: UIColor.yellow, size: gunSize)

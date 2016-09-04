@@ -24,6 +24,7 @@ class Interception: SKNode {
         addChild(interceptorNode)
         let followAction = SKAction.follow(strokeNode.path!, speed: 70)
         interceptorNode.run(followAction, completion: {
+            interceptorNode.resetGun()
             self.removeFromParent()
         })
     }
