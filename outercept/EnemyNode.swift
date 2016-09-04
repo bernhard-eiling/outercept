@@ -13,6 +13,8 @@ class EnemyNode: SKSpriteNode {
     private let maxHealth = 5
     private var health: Int
     private let takeDamageAction: SKAction
+    private let baseSpeed: UInt32 = 8
+    private let speedVariance: UInt32 = 4
     
     private var enemyPhysicsBody: SKPhysicsBody {
         let physicsBody = SKPhysicsBody(circleOfRadius: size.width / 2)
@@ -23,58 +25,29 @@ class EnemyNode: SKSpriteNode {
         return physicsBody
     }
     
-    init() {
-        let size = CGSize(width: 30, height: 30)
+    init(withSceneSize sceneSize: CGSize) {
         takeDamageAction = SKAction.sequence([
             SKAction.fadeAlpha(to: 0.5, duration: TimeInterval(0.05)),
             SKAction.fadeAlpha(to: 1.0, duration: TimeInterval(0.05))
             ])
         health = maxHealth
-        super.init(texture: SKTexture(image: UIImage.circle(withDiameter: 30, andColor: UIColor.red)), color: UIColor.red, size: size)
+        super.init(texture: SKTexture(image: UIImage.circle(withDiameter: 30, andColor: UIColor.red)), color: UIColor.red, size: CGSize(width: 30, height: 30))
         name = "enemy"
-    }
-    
-    func reset() {
-        guard let moveToCenterAction = moveToCenterAction(),
-            let randomStartPosition = randomStartPosition() else { return }
-        physicsBody = nil
-        removeAllActions()
+        let randomStartPosition = CGPoint.randomStartPosition(aroundSize: sceneSize)
         position = randomStartPosition
         physicsBody = enemyPhysicsBody
-        health = maxHealth
-        run(moveToCenterAction)
+        let moveToMotherShipAction = SKAction.move(to: CGPoint(x: sceneSize.width / 2, y: sceneSize.height / 2), duration: Double(arc4random_uniform(speedVariance) + baseSpeed))
+        run(moveToMotherShipAction)
     }
     
     func takeDamage(damage: Int) -> Bool {
         run(takeDamageAction)
         health -= damage
         if health <= 0 {
-            reset()
+            removeFromParent()
             return true
         }
         return false
-    }
-    
-    private func randomStartPosition() -> CGPoint? {
-        guard let scene = scene else { return nil }
-        var x: CGFloat
-        var y: CGFloat
-        if Bool.random {
-            x = Bool.random ? -frame.size.width : scene.size.width + frame.size.width
-            y = CGFloat(arc4random_uniform(UInt32(scene.size.height)))
-        }
-        else {
-            x = CGFloat(arc4random_uniform(UInt32(scene.size.width)))
-            y = Bool.random ? -frame.size.height : scene.size.height + frame.size.height
-        }
-        return CGPoint(x: x, y: y)
-    }
-    
-    private func moveToCenterAction() -> SKAction? {
-        guard let scene = scene else { return nil }
-        let randomTimeInterval = Double(arc4random_uniform(5) + 8)
-        let center = CGPoint(x: scene.frame.width / 2, y: scene.frame.height / 2)
-        return SKAction.move(to: center, duration: randomTimeInterval)
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -11,12 +11,13 @@ import GameplayKit
 
 class GameScene: SKScene {
     
-    let physicsContactManager = PhysiksContactManager()
+    var physicsContactManager: PhysiksContactManager?
     var currentInterception: Interception?
     let mothership = MothershipNode()
     let maxNumberInterceptions = 3
     
     override func didMove(to view: SKView) {
+        physicsContactManager = PhysiksContactManager(withScene: self)
         physicsWorld.gravity = CGVector(dx: 0, dy: 0)
         physicsWorld.contactDelegate = physicsContactManager
         anchorPoint = CGPoint(x: 0, y: 0)
@@ -25,9 +26,9 @@ class GameScene: SKScene {
         mothership.setup()
         
         for _ in 0...4 {
-            let enemy = EnemyNode()
+            let enemy = EnemyNode(withSceneSize: size)
             addChild(enemy)
-            enemy.reset()
+            
         }
         
 //        for _ in 0...10 {

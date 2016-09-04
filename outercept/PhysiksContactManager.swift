@@ -19,10 +19,18 @@ struct PhysicsBitmask {
 
 class PhysiksContactManager: NSObject, SKPhysicsContactDelegate {
     
+    private let scene: SKScene
+    
+    init(withScene scene: SKScene) {
+        self.scene = scene
+    }
+    
     func didBegin(_ contact: SKPhysicsContact) {
         if let enemy = contact.bodyB.node as? EnemyNode,
             contact.bodyA.node is MothershipNode  {
-            enemy.reset()
+            enemy.removeFromParent()
+            let enemy = EnemyNode(withSceneSize: scene.size)
+            scene.addChild(enemy)
         }
         if let enemy = contact.bodyA.node as? EnemyNode,
             let interceptor = contact.bodyB.node as? InterceptorNode {
